@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+backend:
+build:
+context: .
+dockerfile: Dockerfile
+ports:
+- "5000:5000"
+environment:
+- DATABASE_URL=postgresql://user:password@db:5432/4forum
+depends_on:
+- db
+- redis
+
+db:
+image: postgres:13
+environment:
+- POSTGRES_USER=user
+- POSTGRES_PASSWORD=password
+- POSTGRES_DB=4forum
+volumes:
+- postgres_data:/var/lib/postgresql/data
+
+redis:
+image: redis:6
+
+nginx:
+image: nginx:latest

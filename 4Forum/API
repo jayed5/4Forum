@@ -1,0 +1,23 @@
+API Documentation
+
+Endpoints
+
+Authentication
+- POST /api/auth/register
+- POST /api/auth/login
+- POST /api/auth/refresh
+
+Servers
+- GET /api/servers
+- POST /api/servers
+- GET /api/servers/{id}
+- DELETE /api/servers/{id}
+
+Subscriptions
+- POST /api/subscriptions
+- GET /api/subscriptions/status
+
+Admin
+- GET /api/admin/users
+- GET /api/admin/subscriptions
+- PUT /api/admin/subscriptions/{id}/approve

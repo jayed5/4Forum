@@ -1,0 +1,84 @@
+Aktualizacja systemu
+apt-get update && apt-get upgrade -y
+
+Instalacja wymaganych pakietów
+apt-get install -y \
+docker.io \
+docker-compose \
+nginx \
+python3-pip \
+postgresql \
+redis-server
+
+Tworzenie struktury katalogów
+mkdir -p /opt/4forum/{backend,frontend,docker}
+
+Kopiowanie plików konfiguracyjnych
+cp -r /opt/4forum/
+
+Uruchamianie kontenerów
+cd /opt/4forum
+docker-compose up -d
+
+1. Sklonuj repozytorium:
+bash
+git clone https://github.com/twoje-repo/4forum.git
+cd 4forum
+
+
+2. Nadaj uprawnienia skryptowi instalacyjnemu:
+bash
+chmod +x setup.sh
+
+
+3. Uruchom skrypt instalacyjny:
+bash
+sudo ./setup.sh
+
+
+4. Skonfiguruj domenę:
+bash
+Edytuj plik /etc/nginx/sites-available/4forum
+sudo nano /etc/nginx/sites-available/4forum
+
+Utwórz dowiązanie symboliczne
+sudo ln -s /etc/nginx/sites-available/4forum /etc/nginx/sites-enabled/
+
+Zrestartuj Nginx
+sudo systemctl restart nginx
+
+
+5. Inicjalizacja bazy danych:
+bash
+docker-compose exec backend flask db upgrade
+
+
+6. Utworzenie konta administratora:
+bash
+docker-compose exec backend flask create-admin
+
+23. Instrukcja użytkowania dla administratora
+
+1. Logowanie do panelu admina:
+
+URL: https://4forum.com/admin
+Klucz: [wygenerowany podczas instalacji]
+Hasło: [ustawione podczas instalacji]
+
+2. Zarządzanie subskrypcjami (kontynuacja):
+- Sprawdź dowód wpłaty klikając na załącznik
+- Zatwierdź lub odrzuć subskrypcję używając odpowiednich przycisków
+- System automatycznie aktywuje premium dla użytkownika po zatwierdzeniu
+
+3. Zarządzanie użytkownikami:
+- Przejdź do zakładki "Użytkownicy"
+- Możliwość blokowania/odblokowania kont
+- Możliwość resetowania kluczy dostępu
+- Podgląd statystyk aktywności
+
+4. Monitoring systemu:
+- Zakładka "Statystyki" pokazuje:
+- Liczbę aktywnych użytkowników
+- Wykorzystanie przestrzeni dyskowej
+- Obciążenie serwera
+- Logi systemowe
