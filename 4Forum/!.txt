@@ -57,8 +57,6 @@ docker-compose exec backend flask db upgrade
 bash
 docker-compose exec backend flask create-admin
 
-23. Instrukcja użytkowania dla administratora
-
 1. Logowanie do panelu admina:
 
 URL: https://4forum.com/admin
